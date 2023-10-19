@@ -13,7 +13,9 @@ namespace Dat_api.Controllers
 
         public UsersController(DataContext context)
         {
+        
             _context = context;
+        
         }
 
         [HttpGet]
@@ -22,6 +24,7 @@ namespace Dat_api.Controllers
             var users = await _context.Users.ToListAsync();
 
             return users;
+        
         }
 
         [HttpGet("{id}")]
@@ -29,6 +32,7 @@ namespace Dat_api.Controllers
         {
 
             return await _context.Users.FindAsync(id);
+   
         }
     }
 }
