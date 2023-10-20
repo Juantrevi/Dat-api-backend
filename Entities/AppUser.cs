@@ -1,4 +1,5 @@
-﻿namespace Dat_api.Entities
+﻿
+namespace Dat_api.Entities
 {
     public class AppUser
     {

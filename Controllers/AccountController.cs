@@ -1,10 +1,10 @@
-﻿using System.Data.Entity;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using Dat_api.Data;
 using Dat_api.DTOs;
 using Dat_api.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dat_api.Controllers
 {
