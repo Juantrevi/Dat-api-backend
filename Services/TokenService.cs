@@ -21,6 +21,21 @@ namespace Dat_api.Services
             {
                 new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
             };
+
+            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature); //signing credentials
+
+            var tokenDescriptor = new SecurityTokenDescriptor //token descriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddDays(7), //token expires after 7 days
+                SigningCredentials = creds
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler(); //token handler
+
+            var token = tokenHandler.CreateToken(tokenDescriptor); //create token
+
+            return tokenHandler.WriteToken(token); //write token
         }
     }
 }
