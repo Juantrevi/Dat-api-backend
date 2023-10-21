@@ -39,6 +39,11 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
 
+//After line on the top
+app.UseAuthentication(); //Asks do you have an authentication? Valid id?
+app.UseAuthorization(); //Checks if the user is authorized to do this request, valid token?
+//Until here
+
 app.MapControllers();
 
 app.Run();
