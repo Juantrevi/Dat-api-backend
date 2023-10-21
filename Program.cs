@@ -1,5 +1,6 @@
 using System.Text;
 using Dat_api.Data;
+using Dat_api.Extentions;
 using Dat_api.Interfaces;
 using Dat_api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,27 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<DataContext>(opt =>
-{
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+builder.Services.AddApplicationServices(builder.Configuration);
 
-// AddScoped creates a new instance of the service for each HTTP request (Another option is AddSingleton)
-builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddIdentityServices(builder.Configuration);
 
-builder.Services.AddCors();
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"])),
-            ValidateIssuer = false,
-            ValidateAudience = false
-        };
-    });
 
 var app = builder.Build();
 
