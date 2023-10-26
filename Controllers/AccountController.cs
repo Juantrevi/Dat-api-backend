@@ -26,7 +26,7 @@ namespace Dat_api.Controllers
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {   
             if(await UserExists(registerDto.Username)) return BadRequest("Username is taken");
-
+            
             //using is used to dispose of the hmac object after it is used (Garbage Collection)
             using var hmac = new HMACSHA512();
 

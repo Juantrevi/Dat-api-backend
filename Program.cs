@@ -1,20 +1,12 @@
-using System.Text;
-using Dat_api.Data;
+
 using Dat_api.Extentions;
-using Dat_api.Interfaces;
-using Dat_api.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-
 builder.Services.AddApplicationServices(builder.Configuration);
-
 builder.Services.AddIdentityServices(builder.Configuration);
 
 
