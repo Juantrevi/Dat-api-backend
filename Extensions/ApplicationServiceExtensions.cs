@@ -12,8 +12,7 @@ namespace Dat_api.Extentions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-            // AddScoped creates a new instance of the service for each HTTP request (Another option is AddSingleton)
-            services.AddScoped<ITokenService, TokenService>();
+
 
             services.AddDbContext<DataContext>(opt =>
             {
@@ -21,6 +20,9 @@ namespace Dat_api.Extentions
             });
 
             services.AddCors();
+            // AddScoped creates a new instance of the service for each HTTP request (Another option is AddSingleton)
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
 
             return services;

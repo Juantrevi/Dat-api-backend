@@ -1,6 +1,8 @@
 
+using Dat_api.Data;
 using Dat_api.Extentions;
 using Dat_api.Middleware;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,19 @@ app.UseAuthorization(); //Checks if the user is authorized to do this request, v
 //Until here
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try {     
+    var context = services.GetRequiredService<DataContext>();
+    await context.Database.MigrateAsync();
+    await Seed.SeedUsers(context);
+}
+catch (Exception ex)
+{
+    var logger = services.GetService<ILogger<Program>>();
+    logger.LogError(ex, "An error occured during migration");
+}
 
 app.Run();
 

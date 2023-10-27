@@ -1,5 +1,8 @@
-﻿namespace Dat_api.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Dat_api.Entities
 {
+    [Table("Photos")]
     public class Photo
     {
         public int Id { get; set; }
