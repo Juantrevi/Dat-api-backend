@@ -23,6 +23,7 @@ namespace Dat_api.Extentions
             // AddScoped creates a new instance of the service for each HTTP request (Another option is AddSingleton)
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
             return services;
