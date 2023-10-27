@@ -36,10 +36,10 @@ namespace Dat_api.Entities
 
         public List<Photo> Photos { get; set; } = new();
 
-        public int GetAge()
+/*        public int GetAge()
         {
             return DateOfBirth.calculateAge();
-        }
+        }*/
 
 
 

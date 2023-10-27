@@ -27,11 +27,13 @@ namespace Dat_api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
-            var users = await _userRepository.GetUsersAsync();
+            var users = await _userRepository.GetMembersAsync();
 
-            var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);
+/*            var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);*/
 
-            return Ok(usersToReturn);
+
+
+            return Ok(users);
 
         
         }
@@ -39,10 +41,12 @@ namespace Dat_api.Controllers
         [HttpGet("{username}")]
         public async  Task<ActionResult<MemberDto>> GetUser(string username)
         {
+            //This is less performant as it needs to map the user to a memberDto
+/*            var user = await _userRepository.GetUserByUserNameAsync(username);
 
-            var user = await _userRepository.GetUserByUserNameAsync(username);
+            return _mapper.Map<MemberDto>(user);*/
 
-            return _mapper.Map<MemberDto>(user);
+            return await _userRepository.GetMemberAsync(username);
    
         }
     }

@@ -1,4 +1,7 @@
-﻿using Dat_api.Entities;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Dat_api.DTOs;
+using Dat_api.Entities;
 using Dat_api.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
@@ -8,12 +11,12 @@ namespace Dat_api.Data
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
-        public UserRepository(DataContext context)
+        private readonly IMapper _mapper;
+        public UserRepository(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
-
-
 
         public async Task<AppUser> GetUserByIdAsync(int id)
         {
@@ -27,6 +30,7 @@ namespace Dat_api.Data
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
 
+        //Not using this method, but it's here for reference, we're using GetMembersAsync instead
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
             return await _context.Users
@@ -43,6 +47,33 @@ namespace Dat_api.Data
         {
             _context.Entry(user).State = EntityState.Modified;
 
+        }
+
+        //Another way of getting the users, being a little bit more performant as it doesn't need to map the user to a memberDto
+        public async Task<MemberDto> GetMemberAsync(string username)
+        {
+            //This is what it looks like without automapper
+/*            return await _context.Users
+                .Where(x => x.UserName == username)
+                .Select(user => new MemberDto{
+                Id = user.Id,
+                UserName = user.UserName,
+                KnownAs = user.KnownAs,
+                Age = user.DateOfBirth.CalculateAge(),
+            }).SingleOrDefaultAsync();*/
+
+            //This is what it looks like with automapper
+            return await _context.Users
+                .Where(x => x.UserName == username)
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<MemberDto>> GetMembersAsync()
+        {
+            return await _context.Users
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
         }
     }
 }
