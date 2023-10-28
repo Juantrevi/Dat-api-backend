@@ -20,6 +20,7 @@ namespace Dat_api.Extentions
             });
 
             services.AddCors();
+
             // AddScoped creates a new instance of the service for each HTTP request (Another option is AddSingleton)
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
