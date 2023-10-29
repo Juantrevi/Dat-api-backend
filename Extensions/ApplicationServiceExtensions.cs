@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Dat_api.Data;
+using Dat_api.Helpers;
 using Dat_api.Interfaces;
 using Dat_api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -25,6 +26,8 @@ namespace Dat_api.Extentions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            services.AddScoped<IPhotoService, PhotoService>();
 
 
             return services;
