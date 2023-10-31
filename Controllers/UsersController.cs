@@ -24,6 +24,7 @@ namespace Dat_api.Controllers
             _userRepository = userRepository;
             _mapper = mapper;
             _photoService = photoService;
+
         }
 
 
@@ -32,6 +33,7 @@ namespace Dat_api.Controllers
         {
             var users = await _userRepository.GetMembersAsync();
 
+            //This is less performant as it needs to map the user to a memberDto
 /*            var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);*/
 
 
