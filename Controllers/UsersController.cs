@@ -75,6 +75,8 @@ namespace Dat_api.Controllers
         {
             var user = await _userRepository.GetUserByUserNameAsync(User.GetUsername());
 
+            if (user == null) return NotFound();
+
             var result = await _photoService.AddPhotoAsync(file);
 
             if (result.Error != null) return BadRequest(result.Error.Message);
@@ -94,7 +96,14 @@ namespace Dat_api.Controllers
             user.Photos.Add(photo);
 
             if (await _userRepository.SaveAllAsync())
-            { }
+            {
+                return _mapper.Map<PhotoDto>(photo);
+            }
+            else
+            {
+                return BadRequest("Problem adding photo");
+            }
+
         }
     }
 }
