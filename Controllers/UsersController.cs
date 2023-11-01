@@ -3,6 +3,7 @@ using AutoMapper;
 using Dat_api.Data;
 using Dat_api.DTOs;
 using Dat_api.Entities;
+using Dat_api.Extensions;
 using Dat_api.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -58,8 +59,7 @@ namespace Dat_api.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var user = await _userRepository.GetUserByUserNameAsync(username);
+            var user = await _userRepository.GetUserByUserNameAsync(User.GetUsername());
 
             if (user == null) return NotFound();
 
@@ -68,6 +68,33 @@ namespace Dat_api.Controllers
             if (await _userRepository.SaveAllAsync()) return NoContent();
 
             return BadRequest("Failed to update user");
+        }
+
+        [HttpPost("add-photo")]
+        public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
+        {
+            var user = await _userRepository.GetUserByUserNameAsync(User.GetUsername());
+
+            var result = await _photoService.AddPhotoAsync(file);
+
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
+            var photo = new Photo
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+
+            };
+
+            if (user.Photos.Count == 0)
+            {
+                photo.IsMain = true;
+            }
+
+            user.Photos.Add(photo);
+
+            if (await _userRepository.SaveAllAsync())
+            { }
         }
     }
 }
