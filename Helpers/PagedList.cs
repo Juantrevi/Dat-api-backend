@@ -1,5 +1,5 @@
-﻿using System.Data.Entity;
-using System.Runtime.CompilerServices;
+﻿
+using Microsoft.EntityFrameworkCore;
 
 namespace Dat_api.Helpers
 {
@@ -33,6 +33,6 @@ namespace Dat_api.Helpers
                 .ToListAsync();
 
             return new PagedList<T>(items, count, pageNumber, pageSize);
-        }
+        }   
     }
 }

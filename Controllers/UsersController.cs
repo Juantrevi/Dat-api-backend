@@ -4,6 +4,7 @@ using Dat_api.Data;
 using Dat_api.DTOs;
 using Dat_api.Entities;
 using Dat_api.Extensions;
+using Dat_api.Helpers;
 using Dat_api.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,12 +31,11 @@ namespace Dat_api.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+        public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
-            var users = await _userRepository.GetMembersAsync();
+            var users = await _userRepository.GetMembersAsync(userParams);
 
-            //This is less performant as it needs to map the user to a memberDto
-/*            var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);*/
+            Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages));
 
 
 
