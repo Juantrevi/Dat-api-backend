@@ -20,7 +20,9 @@ namespace Dat_api.Extentions
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
 
+
             services.AddCors();
+
 
             // AddScoped creates a new instance of the service for each HTTP request (Another option is AddSingleton)
             services.AddScoped<ITokenService, TokenService>();
@@ -29,7 +31,6 @@ namespace Dat_api.Extentions
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<LogUserActivity>();
-
 
             return services;
         }

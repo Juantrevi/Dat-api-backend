@@ -33,15 +33,12 @@ namespace Dat_api.Controllers
             var user = _mapper.Map<AppUser>(registerDto);
             
             
-            
             //using is used to dispose of the hmac object after it is used (Garbage Collection)
             using var hmac = new HMACSHA512();
-
 
             user.UserName = registerDto.Username.ToLower();
             user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
             user.PasswordSalt = hmac.Key;
-
 
 
             _context.Users.Add(user);
