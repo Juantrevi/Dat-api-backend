@@ -13,5 +13,7 @@ namespace Dat_api.Data
 
         public DbSet<AppUser> Users { get; set; }
 
+        public DbSet<UserLike> Likes { get; set; }
+
     }
 }

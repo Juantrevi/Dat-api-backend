@@ -64,7 +64,7 @@ namespace Dat_api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Dat_api.Entities.Photo", b =>
@@ -89,7 +89,7 @@ namespace Dat_api.Data.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Photos");
+                    b.ToTable("Photos", (string)null);
                 });
 
             modelBuilder.Entity("Dat_api.Entities.Photo", b =>
