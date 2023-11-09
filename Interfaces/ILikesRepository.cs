@@ -1,4 +1,5 @@
-﻿using Dat_api.Entities;
+﻿using Dat_api.DTOs;
+using Dat_api.Entities;
 
 namespace Dat_api.Interfaces
 {

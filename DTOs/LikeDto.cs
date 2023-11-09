@@ -1,6 +1,6 @@
 ﻿namespace Dat_api.DTOs
 {
-	public class LikesDto
+	public class LikeDto
 	{
 		public int Id { get; set; }
 
