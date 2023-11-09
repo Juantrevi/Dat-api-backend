@@ -1,5 +1,6 @@
 ﻿using Dat_api.DTOs;
 using Dat_api.Entities;
+using Dat_api.Helpers;
 
 namespace Dat_api.Interfaces
 {
@@ -9,6 +10,6 @@ namespace Dat_api.Interfaces
 
 		Task<AppUser> GetUserWithLikes(int userId);
 
-		Task<IEnumerable<LikeDto>> GetUserLikes(string predicate, int userId);
+		Task<PagedList<LikeDto>> GetUserLikes(LikesParams likesParams);
 	}
 }
