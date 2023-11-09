@@ -1,4 +1,5 @@
-﻿using Dat_api.Entities;
+﻿using Dat_api.DTOs;
+using Dat_api.Entities;
 using Dat_api.Extensions;
 using Dat_api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,14 @@ namespace Dat_api.Controllers
 			if (await _userRepository.SaveAllAsync()) return Ok();
 
 			return BadRequest("Failed to like user");
+		}
+
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<LikeDto>>> GetUserLikes(string predicate)
+		{
+			var users = await _likesRepository.GetUserLikes(predicate, int.Parse(User.GetUserId()));
+
+			return Ok(users);
 		}
     }
 }
