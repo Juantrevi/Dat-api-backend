@@ -7,6 +7,7 @@ namespace Dat_api.Helpers
 {
     public class LogUserActivity : IAsyncActionFilter
     {
+
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var resultContext = await next();
@@ -23,5 +24,7 @@ namespace Dat_api.Helpers
 
             await repo.SaveAllAsync();
         }
+
+
     }
 }

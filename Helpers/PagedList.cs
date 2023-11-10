@@ -5,6 +5,7 @@ namespace Dat_api.Helpers
 {
     public class PagedList<T> : List<T>
     {
+
         public PagedList(IEnumerable<T> items, int count, int pageNumber, int pageSize)
         {
             CurrentPage = pageNumber;
@@ -14,6 +15,7 @@ namespace Dat_api.Helpers
 
             AddRange(items);
         }
+
 
         public int CurrentPage { get; set; }
 
@@ -34,5 +36,7 @@ namespace Dat_api.Helpers
 
             return new PagedList<T>(items, count, pageNumber, pageSize);
         }   
+
+
     }
 }

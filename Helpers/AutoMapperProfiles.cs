@@ -7,6 +7,7 @@ namespace Dat_api.Helpers
 {
     public class AutoMapperProfiles : Profile
     {
+
         public AutoMapperProfiles()
         {
             CreateMap<AppUser, MemberDto>()
@@ -18,5 +19,7 @@ namespace Dat_api.Helpers
             CreateMap<MemberUpdateDto, AppUser>();
             CreateMap<RegisterDto, AppUser>();
         }
+
+
     }
 }
