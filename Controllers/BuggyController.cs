@@ -20,6 +20,7 @@ namespace Dat_api.Controllers
             return "secret text";
         }
 
+
         [HttpGet("not-fund")] //GET //api/buggy/auth
         public ActionResult<AppUser> GetNotFound()
         {
@@ -29,6 +30,7 @@ namespace Dat_api.Controllers
             
             return thing;
         }
+
 
         [HttpGet("server-error")] //GET //api/buggy/auth
         public ActionResult<string> GetServerError()
@@ -41,6 +43,7 @@ namespace Dat_api.Controllers
                 return thingToReturn;
  
         }
+
 
         [HttpGet("bad-request")] //GET //api/buggy/auth
         public ActionResult<string> GetBadRequest()

@@ -8,6 +8,7 @@ namespace Dat_api.Data
 {
     public class Seed
     {
+
         public static async Task SeedUsers(DataContext context)
         {
             if (await context.Users.AnyAsync()) return;
@@ -31,5 +32,7 @@ namespace Dat_api.Data
 
             await context.SaveChangesAsync();
         }
+
+
     }
 }

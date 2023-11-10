@@ -18,6 +18,7 @@ namespace Dat_api.Controllers
 			_likesRepository = likesRepository;
 		}
 
+
 		[HttpPost("{username}")]
 		public async Task<ActionResult> AddLike(string username)
 		{
@@ -45,6 +46,7 @@ namespace Dat_api.Controllers
 
 			return BadRequest("Failed to like user");
 		}
+
 
 		[HttpGet]
 		public async Task<ActionResult<PagedList<LikeDto>>> GetUserLikes([FromQuery]LikesParams likesParams)

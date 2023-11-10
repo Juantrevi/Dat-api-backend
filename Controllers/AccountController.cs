@@ -17,6 +17,7 @@ namespace Dat_api.Controllers
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
+
         public AccountController(DataContext context, ITokenService tokenService, IMapper mapper)
         {
             _tokenService = tokenService;
@@ -24,6 +25,7 @@ namespace Dat_api.Controllers
             _mapper = mapper;
          
         }
+
 
         [HttpPost("register")] //POST //api/accounts/register
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
@@ -54,6 +56,7 @@ namespace Dat_api.Controllers
             };
 
         }
+
 
         [HttpPost("login")] //POST //api/accounts/login 
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)

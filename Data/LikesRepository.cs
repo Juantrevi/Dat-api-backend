@@ -15,10 +15,12 @@ namespace Dat_api.Data
             _context = context;
         }
 
+
         public async Task<UserLike> GetUserLike(int sourceUserId, int targetUserId)
 		{
 			return await _context.Likes.FindAsync(sourceUserId, targetUserId);
 		}
+
 
 		public async Task<PagedList<LikeDto>> GetUserLikes(LikesParams likesParams)
 		{
@@ -49,6 +51,7 @@ namespace Dat_api.Data
 
 			return await PagedList<LikeDto>.CreateAsync(likedUsers, likesParams.PageNumber, likesParams.PageSize);
 		}
+
 
 		public async Task<AppUser> GetUserWithLikes(int userId)
 		{

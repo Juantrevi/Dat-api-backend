@@ -52,6 +52,7 @@ namespace Dat_api.Controllers
         
         }
 
+
         [HttpGet("{username}")]
         public async  Task<ActionResult<MemberDto>> GetUser(string username)
         {
@@ -63,6 +64,7 @@ namespace Dat_api.Controllers
             return await _userRepository.GetMemberAsync(username);
    
         }
+
 
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
@@ -77,6 +79,7 @@ namespace Dat_api.Controllers
 
             return BadRequest("Failed to update user");
         }
+
 
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
@@ -114,6 +117,7 @@ namespace Dat_api.Controllers
 
         }
 
+
         [HttpPut("set-main-photo/{photoId}")]
         public async Task<ActionResult> SetMainPhoto(int photoId)
         {
@@ -137,6 +141,7 @@ namespace Dat_api.Controllers
 
             return BadRequest("Failed to set main photo");
         }
+
 
         [HttpDelete("delete-photo/{photoId}")]
         public async Task<ActionResult> DeletePhoto(int photoId)
