@@ -5,6 +5,7 @@ namespace Dat_api.Extensions
 {
     public static class HttpExtensions
     {
+
         public static void AddPaginationHeader(this HttpResponse response, PaginationHeader header)
         {
             var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
@@ -13,5 +14,7 @@ namespace Dat_api.Extensions
 
             response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
         }
+
+
     }
 }

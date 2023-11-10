@@ -24,12 +24,14 @@ namespace Dat_api.Data
             return await _context.Users.FindAsync(id);
         }
 
+
         public async Task<AppUser> GetUserByUserNameAsync(string username)
         {
             return await _context.Users
                 .Include(p => p.Photos)
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
+
 
         //Not using this method, but it's here for reference, we're using GetMembersAsync instead
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
@@ -39,16 +41,19 @@ namespace Dat_api.Data
                 .ToListAsync();
         }
 
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
 
         public void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
 
         }
+
 
         //Another way of getting the users, being a little bit more performant as it doesn't need to map the user to a memberDto
         public async Task<MemberDto> GetMemberAsync(string username)
@@ -69,6 +74,7 @@ namespace Dat_api.Data
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }
+
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
@@ -93,5 +99,7 @@ namespace Dat_api.Data
                 userParams.PageSize);
                 
         }
+
+
     }
 }

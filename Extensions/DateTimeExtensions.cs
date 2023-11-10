@@ -2,6 +2,7 @@
 {
     public static class DateTimeExtensions
     {
+
         public static int calculateAge(this DateOnly dateOfBirth)
         {
             var today = DateOnly.FromDateTime(DateTime.UtcNow);
@@ -15,5 +16,7 @@
 
             return age;
         }
+
+
     }
 }
