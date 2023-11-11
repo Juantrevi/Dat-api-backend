@@ -8,6 +8,7 @@ namespace Dat_api.Services
 {
     public class PhotoService : IPhotoService
     {
+
         private readonly Cloudinary _cloudinary;
 
         public PhotoService(IOptions<CloudinarySettings> config) 
@@ -19,6 +20,7 @@ namespace Dat_api.Services
                                     );
             _cloudinary = new Cloudinary( acc );
         }
+
 
         public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file)
         {
@@ -39,6 +41,7 @@ namespace Dat_api.Services
 
             return uploadResult;
         }
+
 
         public async Task<DeletionResult> DeletePhotoAsync(string publicId)
         {

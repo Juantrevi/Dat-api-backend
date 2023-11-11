@@ -38,5 +38,6 @@ namespace Dat_api.Services
 
             return tokenHandler.WriteToken(token); //write token
         }
+
     }
 }
