@@ -21,6 +21,7 @@ namespace Dat_api.Controllers
 			_mapper = mapper;
 		}
 
+
 		[HttpPost]
 		public async Task<ActionResult<MessageDto>> CreateMessage(CreateMessageDto createMessageDto)
 		{
@@ -58,6 +59,7 @@ namespace Dat_api.Controllers
 			return BadRequest("Failed to send message");
 		}
 
+
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser([FromQuery] MessageParams messageParams)
 		{
@@ -70,5 +72,14 @@ namespace Dat_api.Controllers
 			return messages;
 		}
 
+
+		[HttpGet("thread/{username}")]
+		public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessageThread(string username)
+		{
+			var currentUsername = User.GetUsername();
+
+			return Ok(await _messageRepository.GetMessageThread(currentUsername, username));
+
+		}
 	}
 }

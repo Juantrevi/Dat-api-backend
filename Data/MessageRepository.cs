@@ -4,6 +4,7 @@ using Dat_api.DTOs;
 using Dat_api.Entities;
 using Dat_api.Helpers;
 using Dat_api.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dat_api.Data
 {
@@ -11,6 +12,7 @@ namespace Dat_api.Data
 	{
 		private readonly DataContext _context;
 		private readonly IMapper _mapper;
+
 
 		public MessageRepository(DataContext context, IMapper mapper)
         {
@@ -24,15 +26,18 @@ namespace Dat_api.Data
 			_context.Messages.Add(message);
 		}
 
+
 		public void DeleteMessage(Message message)
 		{
 			_context.Messages.Remove(message);
 		}
 
+
 		public async Task<Message> GetMessage(int id)
 		{
 			return await _context.Messages.FindAsync(id);
 		}
+
 
 		public async Task<PagedList<MessageDto>> GetMessagesForUser(MessageParams messageParams)
 		{
@@ -53,14 +58,41 @@ namespace Dat_api.Data
 
 		}
 
-		public Task<IEnumerable<MessageDto>> GetMessageThread(int currentUserId, int recipientId)
+
+		public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUserName, string recipientUserName)
 		{
-			throw new NotImplementedException();
+			var messages = await _context.Messages
+				.Include(u => u.Sender).ThenInclude(p => p.Photos)
+				.Include(u => u.Recipient).ThenInclude(p => p.Photos)
+				.Where(
+				m => m.RecipientUsername == currentUserName 
+				&& m.SenderUsername == recipientUserName
+				|| m.RecipientUsername == recipientUserName && m.SenderUsername == currentUserName)
+				.OrderBy(m => m.MessageSent)
+				.ToListAsync();
+
+			var unreadMessages = messages.Where(m => m.DateRead == null && m.RecipientUsername == currentUserName).ToList();
+
+			if (unreadMessages.Any())
+			{
+				foreach (var message in unreadMessages)
+				{
+					message.DateRead = DateTime.UtcNow;
+				}
+
+				await _context.SaveChangesAsync();
+			}
+
+			return _mapper.Map<IEnumerable<MessageDto>>(messages);
+
 		}
+
 
 		public async Task<bool> SaveAllAsync()
 		{
 			return await _context.SaveChangesAsync() > 0;
 		}
+
+
 	}
 }
