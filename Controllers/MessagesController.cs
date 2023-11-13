@@ -2,6 +2,7 @@
 using Dat_api.DTOs;
 using Dat_api.Entities;
 using Dat_api.Extensions;
+using Dat_api.Helpers;
 using Dat_api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,6 +56,18 @@ namespace Dat_api.Controllers
 			}
 
 			return BadRequest("Failed to send message");
+		}
+
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser([FromQuery] MessageParams messageParams)
+		{
+			messageParams.Username = User.GetUsername();
+
+			var messages = await _messageRepository.GetMessagesForUser(messageParams);
+
+			Response.AddPaginationHeader(new PaginationHeader(messages.CurrentPage, messages.PageSize, messages.TotalCount, messages.TotalPages));
+
+			return messages;
 		}
 
 	}
