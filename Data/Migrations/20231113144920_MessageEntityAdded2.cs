@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Dat_api.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class MessageEntityAdded : Migration
+    public partial class MessageEntityAdded2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,8 +17,8 @@ namespace Dat_api.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    senderId = table.Column<int>(type: "INTEGER", nullable: false),
-                    senderUsername = table.Column<string>(type: "TEXT", nullable: true),
+                    SenderId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SenderUsername = table.Column<string>(type: "TEXT", nullable: true),
                     RecipientId = table.Column<int>(type: "INTEGER", nullable: false),
                     RecipientUsername = table.Column<string>(type: "TEXT", nullable: true),
                     Content = table.Column<string>(type: "TEXT", nullable: true),
@@ -37,8 +37,8 @@ namespace Dat_api.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Messages_Users_senderId",
-                        column: x => x.senderId,
+                        name: "FK_Messages_Users_SenderId",
+                        column: x => x.SenderId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -50,9 +50,9 @@ namespace Dat_api.Data.Migrations
                 column: "RecipientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Messages_senderId",
+                name: "IX_Messages_SenderId",
                 table: "Messages",
-                column: "senderId");
+                column: "SenderId");
         }
 
         /// <inheritdoc />

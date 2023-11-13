@@ -43,7 +43,7 @@ namespace Dat_api.Data
 				.OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Message>()
-                .HasOne(u => u.sender)
+                .HasOne(u => u.Sender)
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
 

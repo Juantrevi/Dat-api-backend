@@ -94,17 +94,17 @@ namespace Dat_api.Data.Migrations
                     b.Property<bool>("SenderDeleted")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("senderId")
+                    b.Property<int>("SenderId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("senderUsername")
+                    b.Property<string>("SenderUsername")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RecipientId");
 
-                    b.HasIndex("senderId");
+                    b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
                 });
@@ -157,15 +157,15 @@ namespace Dat_api.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Dat_api.Entities.AppUser", "sender")
+                    b.HasOne("Dat_api.Entities.AppUser", "Sender")
                         .WithMany("MessagesSent")
-                        .HasForeignKey("senderId")
+                        .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Recipient");
 
-                    b.Navigation("sender");
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("Dat_api.Entities.Photo", b =>
