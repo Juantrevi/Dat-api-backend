@@ -11,7 +11,8 @@ namespace Dat_api.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<AppUser, MemberDto>()
-                .ForMember(destinationMember => destinationMember.PhotoUrl,
+                .ForMember(
+                destinationMember => destinationMember.PhotoUrl,
                 opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.calculateAge()));
 
