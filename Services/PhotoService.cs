@@ -21,7 +21,6 @@ namespace Dat_api.Services
             _cloudinary = new Cloudinary( acc );
         }
 
-
         public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file)
         {
             var uploadResult = new ImageUploadResult();
@@ -41,7 +40,6 @@ namespace Dat_api.Services
 
             return uploadResult;
         }
-
 
         public async Task<DeletionResult> DeletePhotoAsync(string publicId)
         {
