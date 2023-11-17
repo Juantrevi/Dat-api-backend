@@ -38,7 +38,7 @@ namespace Dat_api.Entities
         
         public List<Message> MessagesReceived { get; set; }
 
-        public ICollection<AppUserRole> userRoles { get; set;}
+        public ICollection<AppUserRole> UserRoles { get; set;}
 
 
     }
