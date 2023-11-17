@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.Json;
 using Dat_api.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dat_api.Data
@@ -9,9 +10,9 @@ namespace Dat_api.Data
     public class Seed
     {
 
-        public static async Task SeedUsers(DataContext context)
+        public static async Task SeedUsers(UserManager<AppUser> userManager)
         {
-            if (await context.Users.AnyAsync()) return;
+            if (await userManager.Users.AnyAsync()) return;
 
             var userData = await System.IO.File.ReadAllTextAsync("Data/UserSeedData.json");
 
@@ -27,10 +28,9 @@ namespace Dat_api.Data
                 //user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd"));
                 //user.PasswordSalt = hmac.Key;
 
-                context.Users.Add(user);
+                await userManager.CreateAsync(user, "Pa$$w0rd");
             }
 
-            await context.SaveChangesAsync();
         }
 
 

@@ -1,7 +1,9 @@
 
 using Dat_api.Data;
+using Dat_api.Entities;
 using Dat_api.Extentions;
 using Dat_api.Middleware;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,8 +31,9 @@ using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try {     
     var context = services.GetRequiredService<DataContext>();
-    await context.Database.MigrateAsync();
-    await Seed.SeedUsers(context);
+	var userManager = services.GetRequiredService<UserManager<AppUser>>();
+	await context.Database.MigrateAsync();
+    await Seed.SeedUsers(userManager);
 }
 catch (Exception ex)
 {
