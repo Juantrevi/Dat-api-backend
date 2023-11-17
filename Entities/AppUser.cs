@@ -1,17 +1,12 @@
 ﻿
 using Dat_api.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace Dat_api.Entities
 {
-    public class AppUser
-    {
-        public int Id { get; set; }
-
-        public string UserName { get; set; }
-
-        public byte[] PasswordHash { get; set; }
-
-        public byte[] PasswordSalt { get; set; }
+    public class AppUser : IdentityUser <int>
+    {   
+        //Id, userName, PasswordHash and PasswordSalt are inherited from IdentityUser
 
         public DateOnly DateOfBirth { get; set; }
 
@@ -42,6 +37,8 @@ namespace Dat_api.Entities
         public List<Message> MessagesSent { get; set; }
         
         public List<Message> MessagesReceived { get; set; }
+
+        public ICollection<AppUserRole> userRoles { get; set;}
 
 
     }

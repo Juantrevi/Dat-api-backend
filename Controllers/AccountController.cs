@@ -36,11 +36,11 @@ namespace Dat_api.Controllers
             
             
             //using is used to dispose of the hmac object after it is used (Garbage Collection)
-            using var hmac = new HMACSHA512();
+            //using var hmac = new HMACSHA512();
 
             user.UserName = registerDto.Username.ToLower();
-            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
-            user.PasswordSalt = hmac.Key;
+            //user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+            //user.PasswordSalt = hmac.Key;
 
 
             _context.Users.Add(user);
@@ -68,14 +68,14 @@ namespace Dat_api.Controllers
             if(user == null) return Unauthorized("Invalid username");
 
             //using is used to dispose of the hmac object after it is used (Garbage Collection)
-            using var hmac = new HMACSHA512(user.PasswordSalt);
+            //using var hmac = new HMACSHA512(user.PasswordSalt);
 
-            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+            //var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
 
-            for(int i = 0; i < computedHash.Length; i++)
-            {
-                if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
-            }
+            //for(int i = 0; i < computedHash.Length; i++)
+            //{
+                //if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
+            //}
 
             return new UserDto
             {
