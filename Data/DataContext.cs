@@ -36,7 +36,7 @@ namespace Dat_api.Data
 			builder.Entity<AppRole>()
 	            .HasMany(ur => ur.UserRoles)
 	            .WithOne(u => u.Role)
-	            .HasForeignKey(ur => ur.UserId)
+	            .HasForeignKey(ur => ur.RoleId)
 	            .IsRequired();
 
 			builder.Entity<UserLike>()
