@@ -1,8 +1,10 @@
 ﻿using Dat_api.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Dat_api.SignalR
 {
+	[Authorize]
 	public class PresenceHub : Hub
 	{
 		public override async Task OnConnectedAsync()
