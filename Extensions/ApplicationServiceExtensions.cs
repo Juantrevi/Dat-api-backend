@@ -3,6 +3,7 @@ using Dat_api.Data;
 using Dat_api.Helpers;
 using Dat_api.Interfaces;
 using Dat_api.Services;
+using Dat_api.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -34,6 +35,7 @@ namespace Dat_api.Extentions
             services.AddScoped<ILikesRepository, LikesRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddSignalR();
+            services.AddSingleton<PresenceTracker>();
 
 
             return services;
