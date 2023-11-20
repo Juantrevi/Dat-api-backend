@@ -3,6 +3,7 @@ using Dat_api.Data;
 using Dat_api.Entities;
 using Dat_api.Extentions;
 using Dat_api.Middleware;
+using Dat_api.SignalR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,7 @@ app.UseAuthorization(); //Checks if the user is authorized to do this request, v
 //Until here
 
 app.MapControllers();
+app.MapHub<PresenceHub>("hubs/presence");
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
