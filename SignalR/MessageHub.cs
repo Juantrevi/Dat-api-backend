@@ -4,10 +4,12 @@ using Dat_api.DTOs;
 using Dat_api.Entities;
 using Dat_api.Extensions;
 using Dat_api.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Dat_api.SignalR
 {
+	[Authorize]
 	public class MessageHub : Hub
 	{
 		private readonly IMessageRepository _messageRepository;
