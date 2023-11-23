@@ -81,6 +81,7 @@ namespace Dat_api.Data
 			_context.Connections.Remove(connection);
 		}
 
+
 		public async Task<bool> SaveAllAsync()
 		{
 			return await _context.SaveChangesAsync() > 0;
@@ -91,6 +92,7 @@ namespace Dat_api.Data
 		{
 			_context.Groups.Add(group);
 		}
+
 
 		public void AddMessage(Message message)
 		{
@@ -103,10 +105,12 @@ namespace Dat_api.Data
 			_context.Messages.Remove(message);
 		}
 
+
 		public async Task<Connection> GetConnection(string connectionId)
 		{
 			return await _context.Connections.FindAsync(connectionId);
 		}
+
 
 		public async Task<Group> GetMessageGroup(string groupName)
 		{
