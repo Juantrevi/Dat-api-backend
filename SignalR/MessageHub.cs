@@ -15,12 +15,15 @@ namespace Dat_api.SignalR
 		private readonly IMessageRepository _messageRepository;
 		private readonly IUserRepository _userRepository;
 		private readonly IMapper _mapper;
+		private readonly IHubContext<PresenceHub> _presenceHub;
 
-		public MessageHub(IMessageRepository messageRepository, IUserRepository userRepository, IMapper mapper)
+		public MessageHub(IMessageRepository messageRepository, IUserRepository userRepository, IMapper mapper, 
+			IHubContext<PresenceHub> presenceHub)
         {
 			_messageRepository = messageRepository;
 			_userRepository = userRepository;
 			_mapper = mapper;
+			_presenceHub = presenceHub;
 		}
 
 
@@ -48,7 +51,6 @@ namespace Dat_api.SignalR
 		}
 
 
-
 		private string GetGroupName(string caller, string other)
 		{
 			// CompareOrdinal is a method that compares two strings and returns an integer
@@ -58,6 +60,7 @@ namespace Dat_api.SignalR
 			// If the caller is less than the other user, then we will return the caller-other
 			return stringCompare ? $"{caller}-{other}" : $"{other}-{caller}";
 		}
+
 
 		public async Task SendMessage(CreateMessageDto createMessageDto)
 		{
@@ -93,6 +96,17 @@ namespace Dat_api.SignalR
 			{
 				message.DateRead = DateTime.UtcNow;
 			}
+			else
+			{
+				var connections = await PresenceTracker.GetConnectionsForUser(recipient.UserName);
+
+				if (connections != null)
+				{
+					await _presenceHub.Clients.Clients(connections)
+						.SendAsync("NewMessageReceived", new { username = sender.UserName, knownAs = sender.KnownAs });
+				}
+			}
+
 
 			_messageRepository.AddMessage(message);
 
@@ -132,5 +146,11 @@ namespace Dat_api.SignalR
 			await _messageRepository.SaveAllAsync();
 
 		}
+
+
+
     }
+
+
+
 }
