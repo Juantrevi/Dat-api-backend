@@ -26,6 +26,8 @@ namespace Dat_api.Interfaces
 
 		Task<Group> GetMessageGroup(string connectionId);
 
+		Task<Group> GetGroupForConnection(string connectionId);
+
 
 	}
 }
