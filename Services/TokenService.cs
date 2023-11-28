@@ -19,7 +19,7 @@ namespace Dat_api.Services
 			_userManager = userManager;
 		}
 
-        public async Task<string> CreateToken(AppUser user)
+        public  async Task<string> CreateToken(AppUser user)
         {
             var claims = new List<Claim> //claims are the things we want to store inside the token
             {
