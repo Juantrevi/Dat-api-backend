@@ -11,5 +11,6 @@ namespace Dat_api.Interfaces
 		Task<AppUser> GetUserWithLikes(int userId);
 
 		Task<PagedList<LikeDto>> GetUserLikes(LikesParams likesParams);
+
 	}
 }
