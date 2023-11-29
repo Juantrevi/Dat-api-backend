@@ -38,6 +38,11 @@ namespace Dat_api.SignalR
 
 			var messages = await _uow.MessageRepository.GetMessageThread(Context.User.GetUsername(), otherUser);
 
+			if (_uow.HasChanges())
+			{
+				await _uow.Complete();
+			} 
+
 			await Clients.Caller.SendAsync("ReceiveMessageThread", messages);
 
 		}
