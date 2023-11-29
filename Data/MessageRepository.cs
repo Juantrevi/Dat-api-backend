@@ -82,11 +82,6 @@ namespace Dat_api.Data
 		}
 
 
-		public async Task<bool> SaveAllAsync()
-		{
-			return await _context.SaveChangesAsync() > 0;
-		}
-
 
 		public void AddGroup(Group group)
 		{
