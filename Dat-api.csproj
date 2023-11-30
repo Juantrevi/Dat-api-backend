@@ -5,11 +5,13 @@
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Dat_api</RootNamespace>
+    <UserSecretsId>fbcd95f0-d5fc-4c9d-b192-69e615699a2e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="CloudinaryDotNet" Version="1.22.0" />
+    <PackageReference Include="Docker.DotNet" Version="3.125.15" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.23" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.12">
