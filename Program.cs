@@ -29,6 +29,10 @@ app.UseAuthentication(); //Asks do you have an authentication? Valid id?
 app.UseAuthorization(); //Checks if the user is authorized to do this request, valid token?
 //Until here
 
+//Before preparing for deployment
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/message");
