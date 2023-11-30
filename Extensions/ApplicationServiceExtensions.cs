@@ -16,10 +16,10 @@ namespace Dat_api.Extentions
         {
 
 
-            services.AddDbContext<DataContext>(opt =>
-            {
-                opt.UseNpgsql(config.GetConnectionString("DefaultConnection"));
-            });
+            //services.AddDbContext<DataContext>(opt =>
+            //{
+            //    opt.UseNpgsql(config.GetConnectionString("DefaultConnection"));
+            //});
 
 
             services.AddCors();

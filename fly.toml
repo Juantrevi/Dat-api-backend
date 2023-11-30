@@ -1,0 +1,28 @@
+# fly.toml app configuration file generated for dat-api-green-dream-9235 on 2023-11-30T17:17:18Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "dat-api-green-dream-9235"
+primary_region = "lhr"
+
+[build]
+  image = "juantrevi70/datingapp:latest"
+
+  [env]
+	ASPNETCORE_URLS = "http://+:8080"
+	CloudinarySettings__CloudName = "difbr2wpj"
+	CloudinarySettings__ApiKey = "237314473777452"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 256
