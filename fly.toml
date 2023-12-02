@@ -1,18 +1,18 @@
-# fly.toml app configuration file generated for dat-api-green-dream-9235 on 2023-11-30T17:17:18Z
+# fly.toml app configuration file generated for dat-api-sparkling on 2023-11-30T22:59:46Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "dat-api-green-dream-9235"
+app = "dat-api-sparkling"
 primary_region = "lhr"
 
 [build]
   image = "juantrevi70/datingapp:latest"
 
-  [env]
-	ASPNETCORE_URLS = "http://+:8080"
-	CloudinarySettings__CloudName = "difbr2wpj"
-	CloudinarySettings__ApiKey = "237314473777452"
+[env]
+  ASPNETCORE_URLS = "http://+:8080"
+  CloudinarySettings__CloudName="difbr2wpj"
+  CloudinarySettings__ApiKey="237314473777452"
 
 [http_service]
   internal_port = 8080
@@ -25,4 +25,4 @@ primary_region = "lhr"
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
-  memory_mb = 256
+  memory_mb = 1024
